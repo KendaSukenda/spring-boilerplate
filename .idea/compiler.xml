@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-boilerplate-entity" />
+        <module name="spring-boilerplate-common" />
+        <module name="spring-boilerplate-app" />
+        <module name="spring-boilerplate-dto" />
+        <module name="spring-boilerplate-repository" />
+        <module name="spring-boilerplate-system" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="module-system" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="module-system" options="-parameters" />
+      <module name="spring-boilerplate" options="" />
+      <module name="spring-boilerplate-app" options="-parameters" />
+      <module name="spring-boilerplate-common" options="-parameters" />
+      <module name="spring-boilerplate-dto" options="-parameters" />
+      <module name="spring-boilerplate-entity" options="-parameters" />
+      <module name="spring-boilerplate-repository" options="-parameters" />
+      <module name="spring-boilerplate-system" options="-parameters" />
+    </option>
+  </component>
+</project>
