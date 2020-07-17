@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: @profileActive@
+
+  data:
+    mongodb:
+      port: 27017
+      database: boilerplate-spring
+      username: boilerplate
+      password: boilerplate

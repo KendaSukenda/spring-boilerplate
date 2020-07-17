@@ -1,0 +1,23 @@
+GET http://localhost:8080/users/id
+Accept: application/json
+
+###
+POST http://localhost:8080/do-login
+Content-Type: application/json
+
+{
+  "username": "Kenda",
+  "password": "Kenda",
+  "roles": ["ROLE_ADMIN","ROLE_USER"]
+}
+
+###
+
+POST http://localhost:8080/do-register
+Content-Type: application/json
+
+{
+  "username": "Kenda",
+  "password": "Kenda",
+  "roles": ["ROLE_ADMIN","ROLE_USER"]
+}
