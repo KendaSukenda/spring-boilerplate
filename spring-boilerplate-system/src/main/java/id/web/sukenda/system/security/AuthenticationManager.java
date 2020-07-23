@@ -33,7 +33,7 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
             }
 
             Claims claims = tokenProvider.getAllClaimsFromToken(authToken);
-            List<String> rolesMap = claims.get("role", List.class);
+            List<String> rolesMap = claims.get("roles", List.class);
             List<GrantedAuthority> authorities = new ArrayList<>();
             for (String rolemap : rolesMap) {
                 authorities.add(new SimpleGrantedAuthority(rolemap));

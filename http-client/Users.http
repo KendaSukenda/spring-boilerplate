@@ -1,4 +1,14 @@
-GET http://localhost:8080/users/id
+GET http://localhost:8080/roles
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9URUFDSEVSIl0sInN1YiI6InN1a2VuZGEiLCJpYXQiOjE1OTU0OTE5NTAsImV4cCI6MTU5NTUyMDc1MH0.ittlok9wo97FDlALaKaZ8s_ZnDEnVbL0vqa9Pg2Avnql3tiw8qxccqdzL9_Pc5cyNyeYTeqLVmOmPFQxYlJU0w
+
+###
+GET http://localhost:8080/users
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9URUFDSEVSIl0sInN1YiI6InN1a2VuZGEiLCJpYXQiOjE1OTU0OTE5NTAsImV4cCI6MTU5NTUyMDc1MH0.ittlok9wo97FDlALaKaZ8s_ZnDEnVbL0vqa9Pg2Avnql3tiw8qxccqdzL9_Pc5cyNyeYTeqLVmOmPFQxYlJU0w
+
+###
+GET http://localhost:8080/users/5f193f6fde32d3373b426f44
 Accept: application/json
 
 ###
@@ -6,9 +16,8 @@ POST http://localhost:8080/do-login
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin",
-  "roles": ["ROLE_ADMIN","ROLE_USER"]
+  "username": "sukenda",
+  "password": "sukenda"
 }
 
 ###
@@ -18,5 +27,8 @@ Content-Type: application/json
 {
   "username": "admin",
   "password": "admin",
-  "roles": ["ROLE_USER","ROLE_ADMIN"]
+  "roles": [
+    "ROLE_ADMIN",
+    "ROLE_TEACHER"
+  ]
 }

@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("menus")
-public class Menu {
+@Document("roles")
+public class Role {
 
     @Id
     private String id;
@@ -21,6 +21,6 @@ public class Menu {
     @Indexed(unique = true)
     private String name;
 
-    private String url;
+    private String code;
 
 }

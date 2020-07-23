@@ -12,4 +12,12 @@
     <packaging>jar</packaging>
     <artifactId>spring-boilerplate-dto</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>id.web.sukenda</groupId>
+            <artifactId>spring-boilerplate-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
 </project>

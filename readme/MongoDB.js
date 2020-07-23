@@ -21,7 +21,7 @@ db.createUser(
         user: "boilerplate",
         pwd: "boilerplate",
         roles: [
-            { role: "readWrite", db: "boilerplate-spring" }
+            {role: "readWrite", db: "boilerplate-spring"}
         ]
     }
 )
@@ -30,7 +30,7 @@ db.createUser(
 db.updateUser("boilerplate",
     {
         roles: [
-            { role: "dbOwner", db: "boilerplate-spring" }
+            {role: "dbOwner", db: "boilerplate-spring"}
         ]
     }
 )
@@ -42,3 +42,22 @@ db.updateUser("boilerplate",
 db.createCollection('users');
 db.createCollection('roles');
 db.createCollection('menus');
+
+db.roles.insertMany([
+    {
+        "name": "ADMIN",
+        "code": "ROLE_ADMIN",
+    },
+    {
+        "name": "USER",
+        "code": "ROLE_USER",
+    },
+    {
+        "name": "TEACHER",
+        "code": "ROLE_TEACHER",
+    },
+    {
+        "name": "STUDENT",
+        "code": "ROLE_STUDENT",
+    },
+])

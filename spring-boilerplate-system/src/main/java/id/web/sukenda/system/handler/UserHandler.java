@@ -1,5 +1,6 @@
 package id.web.sukenda.system.handler;
 
+import id.web.sukenda.dto.UserDto;
 import id.web.sukenda.entity.User;
 import id.web.sukenda.system.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,7 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> doLogin(ServerRequest request) {
-        Mono<User> result = request.bodyToMono(User.class)
+        Mono<User> result = request.bodyToMono(UserDto.class)
                 .flatMap(userService::doLogin);
 
         return result.flatMap(user -> ok()
@@ -31,13 +32,19 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> doRegister(ServerRequest request) {
-        Mono<User> mono = request.bodyToMono(User.class);
-        Mono<User> result = mono.flatMap(userService::doRegister);
+        Mono<UserDto> userDtoMono = request.bodyToMono(UserDto.class);
+        Mono<User> userMono = userDtoMono.flatMap(userService::doRegister);
 
-        return result.flatMap(user -> ok()
+        return userMono.flatMap(user -> ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(user))
                 .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build());
+    }
+
+    public Mono<ServerResponse> find(ServerRequest request) {
+        return ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(userService.find(), User.class);
     }
 
     public Mono<ServerResponse> findById(ServerRequest request) {
