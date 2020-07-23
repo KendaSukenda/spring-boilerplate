@@ -9,7 +9,7 @@ public interface UserService {
 
     Mono<User> findByUsername(String username);
 
-    Flux<User> find();
+    Flux<User> find(int page, int size);
 
     Mono<User> findById(String id);
 

@@ -9,6 +9,7 @@ import id.web.sukenda.repository.UserRepository;
 import id.web.sukenda.system.security.JWTTokenProvider;
 import id.web.sukenda.system.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -37,8 +38,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Flux<User> find() {
-        return userRepository.findAll();
+    public Flux<User> find(int page, int size) {
+        return userRepository.findByEnabledIsTrue(PageRequest.of(page, size));
     }
 
     @Override

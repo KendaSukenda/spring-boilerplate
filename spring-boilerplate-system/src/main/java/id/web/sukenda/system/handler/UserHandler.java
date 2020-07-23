@@ -42,9 +42,12 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> find(ServerRequest request) {
+        String page = request.queryParam("page").orElse("0");
+        String size = request.queryParam("size").orElse("10");
+
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(userService.find(), User.class);
+                .body(userService.find(Integer.parseInt(page), Integer.parseInt(size)), User.class);
     }
 
     public Mono<ServerResponse> findById(ServerRequest request) {

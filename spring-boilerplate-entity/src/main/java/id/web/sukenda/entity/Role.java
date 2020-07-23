@@ -13,10 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document("roles")
-public class Role {
-
-    @Id
-    private String id;
+public class Role extends BaseEntity {
 
     @Indexed(unique = true)
     private String name;
