@@ -1,5 +1,7 @@
 package id.web.sukenda.system.service.impl;
 
+import id.web.sukenda.common.exception.InvalidUsernamePasswordException;
+import id.web.sukenda.common.exception.UserAlreadyExistException;
 import id.web.sukenda.entity.User;
 import id.web.sukenda.repository.UserRepository;
 import id.web.sukenda.system.security.CustomPasswordEncoder;
@@ -36,18 +38,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<User> doRegister(User param) {
-        param.setEnabled(true);
-        param.setPassword(passwordEncoder.encode(param.getPassword()));
+        Mono<User> userMono = userRepository.findByUsername(param.getUsername());
+        return userMono
+                .defaultIfEmpty(param)
+                .flatMap(user -> {
+                    if (user.getId() == null) {
+                        user.setEnabled(true);
+                        user.setPassword(passwordEncoder.encode(param.getPassword()));
+                        user.setAccessToken(tokenProvider.generateToken(user));
+                        return userRepository.save(user).flatMap(Mono::just);
 
-        return userRepository.insert(param);
+                    } else {
+                        return Mono.error(new UserAlreadyExistException("User sudah ada, silahkan menggunakan user lain"));
+                    }
+                });
     }
 
     @Override
     public Mono<User> doLogin(User param) {
-        return userRepository.findByUsername(param.getUsername()).doOnSuccess((user -> {
-            if (user != null)
-                if (passwordEncoder.encode(param.getPassword()).equals(user.getPassword()))
-                    user.setAccessToken(tokenProvider.generateToken(user));
-        }));
+        return userRepository.findByUsername(param.getUsername())
+                .switchIfEmpty(Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener")))
+                .flatMap((user -> {
+                    if (passwordEncoder.encode(param.getPassword()).equals(user.getPassword())) {
+                        user.setAccessToken(tokenProvider.generateToken(user));
+
+                        return Mono.just(user);
+                    }
+
+                    return Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener"));
+                }));
     }
 }
