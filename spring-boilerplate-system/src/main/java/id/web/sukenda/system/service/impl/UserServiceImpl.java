@@ -4,9 +4,9 @@ import id.web.sukenda.common.exception.InvalidUsernamePasswordException;
 import id.web.sukenda.common.exception.UserAlreadyExistException;
 import id.web.sukenda.entity.User;
 import id.web.sukenda.repository.UserRepository;
-import id.web.sukenda.system.security.CustomPasswordEncoder;
 import id.web.sukenda.system.security.JWTTokenProvider;
 import id.web.sukenda.system.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -18,9 +18,9 @@ public class UserServiceImpl implements UserService {
 
     private final JWTTokenProvider tokenProvider;
 
-    private final CustomPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, JWTTokenProvider tokenProvider, CustomPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, JWTTokenProvider tokenProvider, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.tokenProvider = tokenProvider;
         this.passwordEncoder = passwordEncoder;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(param.getUsername())
                 .switchIfEmpty(Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener")))
                 .flatMap((user -> {
-                    if (passwordEncoder.encode(param.getPassword()).equals(user.getPassword())) {
+                    if (passwordEncoder.matches(param.getPassword(), user.getPassword())) {
                         user.setAccessToken(tokenProvider.generateToken(user));
 
                         return Mono.just(user);

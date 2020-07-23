@@ -6,8 +6,8 @@ POST http://localhost:8080/do-login
 Content-Type: application/json
 
 {
-  "username": "Kenda",
-  "password": "Kenda",
+  "username": "admin",
+  "password": "admin",
   "roles": ["ROLE_ADMIN","ROLE_USER"]
 }
 
@@ -16,7 +16,7 @@ POST http://localhost:8080/do-register
 Content-Type: application/json
 
 {
-  "username": "Kenda09",
-  "password": "Kenda",
+  "username": "admin",
+  "password": "admin",
   "roles": ["ROLE_USER","ROLE_ADMIN"]
 }

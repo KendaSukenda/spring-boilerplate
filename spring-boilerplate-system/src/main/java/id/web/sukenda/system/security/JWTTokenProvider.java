@@ -16,17 +16,17 @@ import java.util.Map;
 @Component
 public class JWTTokenProvider {
 
-    @Value("${springbootwebfluxjjwt.jjwt.secret}")
-    private String secret;
+    @Value("${jwt.secret}")
+    private String secretKey;
 
-    @Value("${springbootwebfluxjjwt.jjwt.expiration}")
+    @Value("${jwt.expiration}")
     private String expirationTime;
 
     private Key key;
 
     @PostConstruct
     public void init() {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     public Claims getAllClaimsFromToken(String token) {
