@@ -18,6 +18,7 @@ public class UserRouter {
         return RouterFunctions
                 .route(POST("/do-login").and(accept(MediaType.APPLICATION_JSON)), handler::doLogin)
                 .andRoute(POST("/do-register").and(accept(MediaType.APPLICATION_JSON)), handler::doRegister)
+                .andRoute(POST("/refresh-token").and(accept(MediaType.APPLICATION_JSON)), handler::doRefreshToken)
                 .andRoute(GET("/users").and(accept(MediaType.APPLICATION_JSON)), handler::find)
                 .andRoute(GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById);
     }

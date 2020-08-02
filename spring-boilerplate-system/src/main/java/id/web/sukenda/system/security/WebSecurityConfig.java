@@ -42,6 +42,7 @@ public class WebSecurityConfig {
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .pathMatchers("/do-login").permitAll()
                 .pathMatchers("/do-register").permitAll()
+                .pathMatchers("/refresh-token").permitAll()
                 .anyExchange().authenticated()
                 .and().build();
     }

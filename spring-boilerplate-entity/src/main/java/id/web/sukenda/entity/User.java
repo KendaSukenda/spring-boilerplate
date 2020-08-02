@@ -36,6 +36,8 @@ public class User implements UserDetails {
 
     private List<Role> roles;
 
+    private String refreshToken;
+
     @LastModifiedDate
     private Long lastModifiedDate;
 

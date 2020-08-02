@@ -17,4 +17,6 @@ public interface UserService {
 
     Mono<User> doLogin(UserDto param);
 
+    Mono<User> doRefreshToken(String refreshToken);
+
 }

@@ -12,6 +12,8 @@ public interface UserRepository extends ReactiveMongoRepository<User, String> {
 
     Mono<User> findByUsername(String username);
 
+    Mono<User> findByRefreshToken(String refreshToken);
+
     Flux<User> findByEnabledIsTrue(Pageable page);
 
 }

@@ -22,6 +22,9 @@ public class JWTTokenProvider {
     @Value("${jwt.expiration}")
     private String expirationTime;
 
+    @Value("${jwt.refresh.expiration}")
+    private String expirationRefreshTime;
+
     private Key key;
 
     @PostConstruct
@@ -46,14 +49,14 @@ public class JWTTokenProvider {
         return expiration.before(new Date());
     }
 
-    public String generateToken(User user) {
+    public String generateToken(User user, boolean refresh) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", user.getRoles());
-        return doGenerateToken(claims, user.getUsername());
+        return doGenerateToken(claims, user.getUsername(), refresh);
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String username) {
-        long expirationTimeLong = Long.parseLong(expirationTime); //in second
+    private String doGenerateToken(Map<String, Object> claims, String username, boolean refresh) {
+        long expirationTimeLong = refresh ? Long.parseLong(expirationRefreshTime) : Long.parseLong(expirationTime); //in second
         final Date createdDate = new Date();
         final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong * 1000);
 

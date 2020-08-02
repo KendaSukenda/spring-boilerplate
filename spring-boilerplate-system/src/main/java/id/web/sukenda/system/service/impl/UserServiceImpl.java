@@ -2,6 +2,7 @@ package id.web.sukenda.system.service.impl;
 
 import id.web.sukenda.common.exception.InvalidUsernamePasswordException;
 import id.web.sukenda.common.exception.UserAlreadyExistException;
+import id.web.sukenda.common.exception.UserNotFoundException;
 import id.web.sukenda.common.utils.DTOUtils;
 import id.web.sukenda.dto.UserDto;
 import id.web.sukenda.entity.User;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -56,7 +58,9 @@ public class UserServiceImpl implements UserService {
                     if (user.getId() == null) {
                         user.setEnabled(true);
                         user.setPassword(passwordEncoder.encode(param.getPassword()));
-                        user.setAccessToken(tokenProvider.generateToken(user));
+                        user.setAccessToken(tokenProvider.generateToken(user, false));
+                        user.setRefreshToken(tokenProvider.generateToken(user, true));
+
                         return userRepository.insert(user).flatMap(Mono::just);
 
                     } else {
@@ -71,12 +75,26 @@ public class UserServiceImpl implements UserService {
                 .switchIfEmpty(Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener")))
                 .flatMap((user -> {
                     if (passwordEncoder.matches(param.getPassword(), user.getPassword())) {
-                        user.setAccessToken(tokenProvider.generateToken(user));
+                        user.setRefreshToken(tokenProvider.generateToken(user, true));
+                        user.setAccessToken(tokenProvider.generateToken(user, false));
 
-                        return Mono.just(user);
+                        return userRepository.save(user).flatMap(Mono::just);
                     }
 
                     return Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener"));
                 }));
     }
+
+    @Override
+    public Mono<User> doRefreshToken(String refreshToken) {
+        return userRepository.findByRefreshToken(refreshToken)
+                .switchIfEmpty(Mono.error(new UserNotFoundException("User not found")))
+                .flatMap(user -> {
+                    user.setAccessToken(tokenProvider.generateToken(user, false));
+                    user.setRefreshToken(tokenProvider.generateToken(user, true));
+
+                    return userRepository.save(user).flatMap(Mono::just);
+                });
+    }
+
 }

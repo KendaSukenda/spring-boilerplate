@@ -1,0 +1,17 @@
+server:
+  port: 9000
+  error:
+    whitelabel:
+      enabled: false
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: SPRING BOILERPLATE (DEV)
+  data:
+    mongodb:
+      port: 27017
+      database: boilerplate-spring
+      username: boilerplate
+      password: boilerplate

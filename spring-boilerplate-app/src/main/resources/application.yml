@@ -8,3 +8,18 @@ spring:
       database: boilerplate-spring
       username: boilerplate
       password: boilerplate
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+jwt:
+  secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+  expiration: 28800
+  refresh:
+    expiration: 2880000
+
+logging:
+  file:
+    name: /tmp/spring-boilerplate/log/log.out

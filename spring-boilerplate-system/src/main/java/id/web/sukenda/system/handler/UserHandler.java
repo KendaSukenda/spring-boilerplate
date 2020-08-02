@@ -31,6 +31,17 @@ public class UserHandler {
                 .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build());
     }
 
+    public Mono<ServerResponse> doRefreshToken(ServerRequest request) {
+        String refreshToken = request.queryParam("token").orElse(null);
+        Mono<User> userMono = userService.doRefreshToken(refreshToken);
+
+        return userMono.flatMap(user -> ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(user)
+                .switchIfEmpty(status(HttpStatus.BAD_REQUEST).build())
+                .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build()));
+    }
+
     public Mono<ServerResponse> doRegister(ServerRequest request) {
         Mono<UserDto> userDtoMono = request.bodyToMono(UserDto.class);
         Mono<User> userMono = userDtoMono.flatMap(userService::doRegister);
