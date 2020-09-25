@@ -16,7 +16,7 @@ POST http://localhost:8081/login
 Content-Type: application/json
 
 {
-  "username": "sukenda",
+  "username": "admin",
   "password": "sukenda"
 }
 
@@ -33,5 +33,5 @@ Content-Type: application/json
   ]
 }
 ###
-POST http://localhost:8081/refresh-token?token=eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9URUFDSEVSIl0sInN1YiI6InN1a2VuZGEiLCJpYXQiOjE1OTYwOTc3NTUsImV4cCI6MTU5ODk3Nzc1NX0.qw2lQfxRBNU8G3TMYRWHNcCDP7DWmBp91uAWIaBCvPUJtpkFBkMWg8K4squGs3DOl2Zl13HW6FXMB5NZfTN-t
+POST http://localhost:8081/refresh-token?token=eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJST0xFX0FETUlOIiwiUk9MRV9URUFDSEVSIl0sInN1YiI6InN1a2VuZGEiLCJpYXQiOjE2MDEwMzAzNjEsImV4cCI6MTYwMzkxMDM2MX0.ExDBXhY2KHu5XQgFDhMoX_SRnDZd2kN69K4qMQwqnh5lLIP3S4uBLibx49O5a1GazCURp5vJEn-oZ8zT6oqx8g
 Content-Type: application/json

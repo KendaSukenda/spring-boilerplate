@@ -7,6 +7,7 @@ import id.web.sukenda.entity.Role;
 import id.web.sukenda.repository.RoleRepository;
 import id.web.sukenda.system.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -29,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
                     if (role.getId() == null) {
                         return roleRepository.insert(role).flatMap(Mono::just);
                     } else {
-                        return Mono.error(new DataAlreadyExistException("Role sudah ada, silahkan menggunakan role lain"));
+                        return Mono.error(new DataAlreadyExistException(HttpStatus.BAD_REQUEST, "Role sudah ada, silahkan menggunakan role lain"));
                     }
                 });
     }

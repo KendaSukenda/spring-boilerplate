@@ -27,8 +27,7 @@ public class UserHandler {
 
         return result.flatMap(user -> ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(user))
-                .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build());
+                .bodyValue(user));
     }
 
     public Mono<ServerResponse> refreshToken(ServerRequest request) {
@@ -37,9 +36,7 @@ public class UserHandler {
 
         return userMono.flatMap(user -> ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(user)
-                .switchIfEmpty(status(HttpStatus.BAD_REQUEST).build())
-                .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build()));
+                .bodyValue(user));
     }
 
     public Mono<ServerResponse> register(ServerRequest request) {
@@ -48,8 +45,7 @@ public class UserHandler {
 
         return userMono.flatMap(user -> ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(user))
-                .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build());
+                .bodyValue(user));
     }
 
     public Mono<ServerResponse> find(ServerRequest request) {

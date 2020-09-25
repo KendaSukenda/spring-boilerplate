@@ -1,8 +1,11 @@
 package id.web.sukenda.common.exception;
 
-public class DataAlreadyExistException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-    public DataAlreadyExistException(String message) {
-        super(message);
+public class DataAlreadyExistException extends ResponseStatusException {
+
+    public DataAlreadyExistException(HttpStatus status, String message) {
+        super(status, message);
     }
 }

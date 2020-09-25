@@ -1,8 +1,11 @@
 package id.web.sukenda.common.exception;
 
-public class InvalidUsernamePasswordException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-    public InvalidUsernamePasswordException(String message) {
-        super(message);
+public class InvalidUsernamePasswordException extends ResponseStatusException {
+
+    public InvalidUsernamePasswordException(HttpStatus status, String message) {
+        super(status, message);
     }
 }

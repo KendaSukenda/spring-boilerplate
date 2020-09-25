@@ -1,8 +1,11 @@
 package id.web.sukenda.common.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-    public UserNotFoundException(String message) {
-        super(message);
+public class UserNotFoundException extends ResponseStatusException {
+
+    public UserNotFoundException(HttpStatus status, String message) {
+        super(status, message);
     }
 }

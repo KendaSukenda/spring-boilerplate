@@ -1,8 +1,11 @@
 package id.web.sukenda.common.exception;
 
-public class UserAlreadyExistException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
-    public UserAlreadyExistException(String message) {
-        super(message);
+public class UserAlreadyExistException extends ResponseStatusException {
+
+    public UserAlreadyExistException(HttpStatus status, String message) {
+        super(status, message);
     }
 }
