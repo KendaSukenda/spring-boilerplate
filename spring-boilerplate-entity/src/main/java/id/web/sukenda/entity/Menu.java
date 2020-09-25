@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,5 +17,7 @@ public class Menu extends BaseEntity {
     private String name;
 
     private String url;
+
+    private String icon;
 
 }

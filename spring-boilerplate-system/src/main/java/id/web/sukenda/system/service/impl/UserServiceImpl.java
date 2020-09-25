@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<User> doRegister(UserDto param) {
+    public Mono<User> register(UserDto param) {
         Mono<User> userMono = userRepository.findByUsername(param.getUsername());
         return userMono
                 .defaultIfEmpty((User) DTOUtils.convertToEntity(new User(), param))
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Mono<User> doLogin(UserDto param) {
+    public Mono<User> login(UserDto param) {
         return userRepository.findByUsername(param.getUsername())
                 .switchIfEmpty(Mono.error(new InvalidUsernamePasswordException("Pastikan username dan password anda bener")))
                 .flatMap((user -> {

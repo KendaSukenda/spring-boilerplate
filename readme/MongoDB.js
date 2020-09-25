@@ -61,3 +61,21 @@ db.roles.insertMany([
         "code": "ROLE_STUDENT",
     },
 ])
+
+db.menus.insertMany([
+    {
+        "name": "Dashboard",
+        "url": "/",
+        "icon": "-",
+    },
+    {
+        "name": "Profile",
+        "url": "/profile",
+        "icon": "-",
+    },
+    {
+        "name": "Setting",
+        "url": "/setting",
+        "icon": "-",
+    }
+])

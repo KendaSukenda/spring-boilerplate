@@ -40,8 +40,8 @@ public class WebSecurityConfig {
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange()
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                .pathMatchers("/do-login").permitAll()
-                .pathMatchers("/do-register").permitAll()
+                .pathMatchers("/login").permitAll()
+                .pathMatchers("/register").permitAll()
                 .pathMatchers("/refresh-token").permitAll()
                 .anyExchange().authenticated()
                 .and().build();

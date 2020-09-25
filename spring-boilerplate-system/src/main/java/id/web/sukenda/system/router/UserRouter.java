@@ -16,9 +16,9 @@ public class UserRouter {
     @Bean("UserRouter")
     public RouterFunction<ServerResponse> route(UserHandler handler) {
         return RouterFunctions
-                .route(POST("/do-login").and(accept(MediaType.APPLICATION_JSON)), handler::doLogin)
-                .andRoute(POST("/do-register").and(accept(MediaType.APPLICATION_JSON)), handler::doRegister)
-                .andRoute(POST("/refresh-token").and(accept(MediaType.APPLICATION_JSON)), handler::doRefreshToken)
+                .route(POST("/login").and(accept(MediaType.APPLICATION_JSON)), handler::login)
+                .andRoute(POST("/register").and(accept(MediaType.APPLICATION_JSON)), handler::register)
+                .andRoute(POST("/refresh-token").and(accept(MediaType.APPLICATION_JSON)), handler::refreshToken)
                 .andRoute(GET("/users").and(accept(MediaType.APPLICATION_JSON)), handler::find)
                 .andRoute(GET("/users/{id}").and(accept(MediaType.APPLICATION_JSON)), handler::findById);
     }

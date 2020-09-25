@@ -13,9 +13,9 @@ public interface UserService {
 
     Mono<User> findById(String id);
 
-    Mono<User> doRegister(UserDto param);
+    Mono<User> register(UserDto param);
 
-    Mono<User> doLogin(UserDto param);
+    Mono<User> login(UserDto param);
 
     Mono<User> doRefreshToken(String refreshToken);
 

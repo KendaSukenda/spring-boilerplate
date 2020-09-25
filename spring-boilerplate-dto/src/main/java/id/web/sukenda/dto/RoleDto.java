@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,5 +20,7 @@ public class RoleDto implements Serializable, DTOEntity {
     private String name;
 
     private String code;
+
+    private List<MenuDto> menus;
 
 }

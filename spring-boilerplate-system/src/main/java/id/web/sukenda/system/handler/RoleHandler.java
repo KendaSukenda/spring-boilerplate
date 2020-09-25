@@ -1,7 +1,9 @@
 package id.web.sukenda.system.handler;
 
+import id.web.sukenda.dto.RoleDto;
 import id.web.sukenda.entity.Role;
-import id.web.sukenda.repository.RoleRepository;
+import id.web.sukenda.system.service.RoleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -9,28 +11,21 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 @Component
 public class RoleHandler {
 
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
-    public RoleHandler(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleHandler(RoleService roleService) {
+        this.roleService = roleService;
     }
 
     public Mono<ServerResponse> find(ServerRequest request) {
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(roleRepository.findAll(), Role.class);
-    }
-
-    public Mono<ServerResponse> findById(ServerRequest request) {
-        String id = request.pathVariable("id");
-
-        return ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(roleRepository.findById(id), Role.class);
+                .body(roleService.findAll(), Role.class);
     }
 
     public Mono<ServerResponse> findByCode(ServerRequest request) {
@@ -38,7 +33,17 @@ public class RoleHandler {
 
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(roleRepository.findFirstByCode(code), Role.class);
+                .body(roleService.findByCode(code), Role.class);
+    }
+
+    public Mono<ServerResponse> save(ServerRequest request) {
+        Mono<RoleDto> roleDtoMono = request.bodyToMono(RoleDto.class);
+        Mono<Role> roleMono = roleDtoMono.flatMap(roleService::save);
+
+        return roleMono.flatMap(role -> ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(role))
+                .onErrorResume(throwable -> status(HttpStatus.BAD_REQUEST).build());
     }
 
 }

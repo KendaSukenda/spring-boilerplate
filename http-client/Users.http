@@ -12,7 +12,7 @@ GET http://localhost:8081/users/5f193f6fde32d3373b426f44
 Accept: application/json
 
 ###
-POST http://localhost:8081/do-login
+POST http://localhost:8081/login
 Content-Type: application/json
 
 {
@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8081/do-register
+POST http://localhost:8081/register
 Content-Type: application/json
 
 {

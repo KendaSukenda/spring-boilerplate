@@ -17,6 +17,8 @@ public class RoleRouter {
     public RouterFunction<ServerResponse> route(RoleHandler roleHandler) {
         return RouterFunctions
                 .route(GET("/roles").and(accept(MediaType.APPLICATION_JSON)), roleHandler::find)
+                .andRoute(POST("/roles").and(accept(MediaType.APPLICATION_JSON)), roleHandler::save)
                 .andRoute(GET("/roles/{code}").and(accept(MediaType.APPLICATION_JSON)), roleHandler::findByCode);
     }
+
 }
