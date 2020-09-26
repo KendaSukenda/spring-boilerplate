@@ -19,6 +19,7 @@
         <module>spring-boilerplate-entity</module>
         <module>spring-boilerplate-repository</module>
         <module>spring-boilerplate-dto</module>
+        <module>spring-boilerplate-kesiswaan</module>
     </modules>
 
     <parent>

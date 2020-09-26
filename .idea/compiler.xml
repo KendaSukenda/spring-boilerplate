@@ -11,6 +11,7 @@
         <module name="spring-boilerplate-common" />
         <module name="spring-boilerplate-app" />
         <module name="spring-boilerplate-dto" />
+        <module name="spring-boilerplate-kesiswaan" />
         <module name="spring-boilerplate-repository" />
         <module name="spring-boilerplate-system" />
       </profile>
@@ -27,6 +28,7 @@
       <module name="spring-boilerplate-common" options="-parameters" />
       <module name="spring-boilerplate-dto" options="-parameters" />
       <module name="spring-boilerplate-entity" options="-parameters" />
+      <module name="spring-boilerplate-kesiswaan" options="-parameters" />
       <module name="spring-boilerplate-repository" options="-parameters" />
       <module name="spring-boilerplate-system" options="-parameters" />
     </option>
