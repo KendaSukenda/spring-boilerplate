@@ -82,7 +82,7 @@
     <properties>
         <sonar.organization>sukenda</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.projectKey>sukenda_spring-boilerplate</sonar.projectKey>
+        <sonar.projectKey>sukenda-spring-boilerplate</sonar.projectKey>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
