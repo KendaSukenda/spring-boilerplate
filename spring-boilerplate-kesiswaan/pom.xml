@@ -13,6 +13,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-boilerplate-kesiswaan</artifactId>
 
+    <properties>
+        <sonar.projectKey>spring-boilerplate-kesiswaan</sonar.projectKey>
+    </properties>
+
     <dependencies>
 
         <dependency>

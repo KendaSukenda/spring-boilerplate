@@ -28,7 +28,18 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-         
+
+    <properties>
+        <sonar.organization>sukenda</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>spring-boilerplate</sonar.projectKey>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <java-config.version>1.8</java-config.version>
+        <maven.compiler.version>3.2</maven.compiler.version>
+    </properties>
 
     <dependencies>
 
@@ -78,17 +89,5 @@
         </dependency>
 
     </dependencies>
-
-    <properties>
-        <sonar.organization>sukenda</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.projectKey>sukenda-spring-boilerplate</sonar.projectKey>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <java-config.version>1.8</java-config.version>
-        <maven.compiler.version>3.2</maven.compiler.version>
-    </properties>
 
 </project>

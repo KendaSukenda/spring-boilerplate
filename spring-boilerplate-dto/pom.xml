@@ -12,6 +12,10 @@
     <packaging>jar</packaging>
     <artifactId>spring-boilerplate-dto</artifactId>
 
+    <properties>
+        <sonar.projectKey>spring-boilerplate-dto</sonar.projectKey>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>id.web.sukenda</groupId>

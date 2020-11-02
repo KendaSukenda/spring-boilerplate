@@ -13,6 +13,10 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-boilerplate-common</artifactId>
 
+    <properties>
+        <sonar.projectKey>spring-boilerplate-common</sonar.projectKey>
+    </properties>
+
     <dependencies>
 
         <dependency>
