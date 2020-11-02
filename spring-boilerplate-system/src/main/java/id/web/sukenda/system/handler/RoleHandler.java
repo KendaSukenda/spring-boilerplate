@@ -3,6 +3,7 @@ package id.web.sukenda.system.handler;
 import id.web.sukenda.dto.RoleDto;
 import id.web.sukenda.entity.Role;
 import id.web.sukenda.system.service.RoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 import static org.springframework.web.reactive.function.server.ServerResponse.status;
 
 @Component
+@Slf4j
 public class RoleHandler {
 
     private final RoleService roleService;
@@ -23,6 +25,8 @@ public class RoleHandler {
     }
 
     public Mono<ServerResponse> find(ServerRequest request) {
+        log.info("Path {} ", request.path());
+
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(roleService.findAll(), Role.class);

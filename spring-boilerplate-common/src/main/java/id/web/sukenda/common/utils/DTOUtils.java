@@ -4,6 +4,10 @@ import org.modelmapper.ModelMapper;
 
 public class DTOUtils {
 
+    private DTOUtils() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static DTOEntity convertToDto(Object obj, DTOEntity mapper) {
         return new ModelMapper().map(obj, mapper.getClass());
     }

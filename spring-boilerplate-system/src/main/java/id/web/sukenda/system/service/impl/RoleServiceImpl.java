@@ -1,6 +1,6 @@
 package id.web.sukenda.system.service.impl;
 
-import id.web.sukenda.common.exception.DataAlreadyExistException;
+import id.web.sukenda.common.exception.DefaultException;
 import id.web.sukenda.common.utils.DTOUtils;
 import id.web.sukenda.dto.RoleDto;
 import id.web.sukenda.entity.Role;
@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
                     if (role.getId() == null) {
                         return roleRepository.insert(role).flatMap(Mono::just);
                     } else {
-                        return Mono.error(new DataAlreadyExistException(HttpStatus.BAD_REQUEST, "Role sudah ada, silahkan menggunakan role lain"));
+                        return Mono.error(new DefaultException(HttpStatus.BAD_REQUEST, "Role sudah ada, silahkan menggunakan role lain"));
                     }
                 });
     }

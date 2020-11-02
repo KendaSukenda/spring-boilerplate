@@ -1,8 +1,6 @@
 package id.web.sukenda.system.service.impl;
 
-import id.web.sukenda.common.exception.InvalidUsernamePasswordException;
-import id.web.sukenda.common.exception.UserAlreadyExistException;
-import id.web.sukenda.common.exception.UserNotFoundException;
+import id.web.sukenda.common.exception.DefaultException;
 import id.web.sukenda.common.utils.DTOUtils;
 import id.web.sukenda.dto.UserDto;
 import id.web.sukenda.entity.User;
@@ -64,7 +62,7 @@ public class UserServiceImpl implements UserService {
                         return userRepository.insert(user).flatMap(Mono::just);
 
                     } else {
-                        return Mono.error(new UserAlreadyExistException(HttpStatus.BAD_REQUEST, "User sudah ada, silahkan menggunakan user lain"));
+                        return Mono.error(new DefaultException(HttpStatus.BAD_REQUEST, "User sudah ada, silahkan menggunakan user lain"));
                     }
                 });
     }
@@ -72,7 +70,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Mono<User> login(UserDto param) {
         return userRepository.findByUsername(param.getUsername())
-                .switchIfEmpty(Mono.error(new InvalidUsernamePasswordException(HttpStatus.BAD_REQUEST, "Pastikan username dan password anda bener")))
+                .switchIfEmpty(Mono.error(new DefaultException(HttpStatus.BAD_REQUEST, "Pastikan username dan password anda bener")))
                 .flatMap((user -> {
                     if (passwordEncoder.matches(param.getPassword(), user.getPassword())) {
                         user.setRefreshToken(tokenProvider.generateToken(user, true));
@@ -81,14 +79,14 @@ public class UserServiceImpl implements UserService {
                         return userRepository.save(user).flatMap(Mono::just);
                     }
 
-                    return Mono.error(new InvalidUsernamePasswordException(HttpStatus.BAD_REQUEST, "Pastikan username dan password anda bener"));
+                    return Mono.error(new DefaultException(HttpStatus.BAD_REQUEST, "Pastikan username dan password anda bener"));
                 }));
     }
 
     @Override
     public Mono<User> doRefreshToken(String refreshToken) {
         return userRepository.findByRefreshToken(refreshToken)
-                .switchIfEmpty(Mono.error(new UserNotFoundException(HttpStatus.BAD_REQUEST, "User not found")))
+                .switchIfEmpty(Mono.error(new DefaultException(HttpStatus.BAD_REQUEST, "User not found")))
                 .flatMap(user -> {
                     user.setAccessToken(tokenProvider.generateToken(user, false));
                     user.setRefreshToken(tokenProvider.generateToken(user, true));
