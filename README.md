@@ -1,7 +1,6 @@
 <!-- PROJECT LOGO -->
-<br />
 <p align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/sukenda/spring-boilerplate">
     <img src="spring-boot-logo.png" alt="Logo">
   </a>
 
@@ -33,8 +32,6 @@ Here's a blank template to get started:
 
 * []()
 * []()
-* []()
-
 
 
 <!-- GETTING STARTED -->
@@ -62,8 +59,6 @@ mvn clean install -DskipTests
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
 
 
 <!-- CONTRIBUTING -->
